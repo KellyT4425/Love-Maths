@@ -46,25 +46,26 @@ function runGame(gameType) {
  */
 function checkAnswer() {
 
-
     let userAnswer = parseInt(document.getElementById("answer-box").value);
     let calculatedAnswer = calculateCorrectAnswer();
     let isCorrect = userAnswer === calculatedAnswer[0];
 
     if (isCorrect) {
         alert("Hey! You got it right! :D");
+        incrementScore();
     } else {
-        alert(`Awwww..... you answered ${userAnswer}. The correct answer was ${calculatedAnswer}!`);
+        alert(`Awwww..... you answered ${userAnswer}. The correct answer was ${calculatedAnswer[0]}!`);
+        incrementWrongAnswer();
     }
-
+ 
     runGame(calculatedAnswer[1]);
-
 
 }
 
 /**
  * Gets the operands (the numbers) and the operator (plus, minus etc)
- * directly from the DOM, and returns the correct answer.
+ * directly from the DOM, and returns the correct answer. This gives an array with
+ * two elements the first is the correct answer and the second is the gametype i.e addition
  */
 function calculateCorrectAnswer() {
 
@@ -79,30 +80,36 @@ function calculateCorrectAnswer() {
         throw `Unimplemented operator ${operator}. Aborting!`;
     }
 
-
 }
 
-
+/**
+ * Gets the current score from the DOM and increments it by 1  
+ */
 function incrementScore() {
 
+    let oldScore = parseInt(document.getElementById("score").innerText);
+    document.getElementById("score").innerText = ++oldScore;
+
 }
 
+
+/**
+ * Gets the current tally of incorrect answer from the DOM and increments it by 1  
+ */
 function incrementWrongAnswer() {
+
+    let oldScore = parseInt(document.getElementById("incorrect").innerText);
+    document.getElementById("incorrect").innerText = ++oldScore;
 
 }
 
 //This function gets element by Id from HTML and assigns the runGame function to the
 //code, displaying random addition numbers for the user.
 function displayAdditionQuestion(operand1, operand2) {
+
     document.getElementById("operand1").textContent = operand1;
     document.getElementById("operand2").textContent = operand2;
     document.getElementById("operator").textContent = "+";
-
-
-
-
-
-
 
 }
 
