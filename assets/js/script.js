@@ -16,6 +16,12 @@ document.addEventListener("DOMContentLoaded", function() {
         })
     }
 
+    document.getElementById("answer-box").addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            checkAnswer();
+        }
+    })
+
     runGame("addition");
 })
 
@@ -24,6 +30,9 @@ document.addEventListener("DOMContentLoaded", function() {
  * and after the user's answer has been processed.
  */
 function runGame(gameType) {
+
+    document.getElementById("answer-box").value = "";
+    document.getElementById("answer-box").focus();
 
     //Generates two random numbers between 1 - 25, the +1 ensures that it doesnt
     //start at 0, but starts at 1 by adding 1 on. (.floor) is ensuring it is an 
